@@ -6,12 +6,20 @@ import DashboardCard from '../DashboardCard';
 
 const SAMPLE_DATA = [
   {
-    title: '100',
-    value: 100
+    title: '50',
+    value: 50
   },
   {
-    title: '0.5',
-    value: 0.5
+    title: '25',
+    value: 25
+  },
+  {
+    title: '100',
+    value: 90
+  },
+  {
+    title: '70',
+    value: 70
   }
 ]
 
@@ -70,7 +78,7 @@ function KeyMetrics() {
               fill: 'start',
               data: SAMPLE_DATA.map(data => data.value),
               backgroundColor: gradient,
-              borderColor: gradient,
+              borderColor: 'rgba(54, 162, 235, 100)',
               borderWidth: 5,
             }]
           }}
