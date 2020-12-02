@@ -1,0 +1,69 @@
+@media (max-width: 640px) {
+  .dashboard {
+    padding: 1rem !important;
+    height: 250vh;
+
+    .dashboard-container {
+      grid-auto-flow: row !important;
+      grid-template-rows: repeat(24, minmax(0, 1fr)) !important;
+      height: 100% !important;
+
+      .sidebar {
+        display: none;
+      }
+
+      .key-metrics, .campaign-metrics,
+      .performance-metrics, .map-view {
+        grid-column: span 12 / span 12 !important;
+      }
+
+      .key-metrics {
+        grid-row: span 11 / span 11 !important;
+      }
+
+      .campaign-metrics, .performance-metrics,
+      .map-view {
+        grid-row: span  4 / span 4 !important;
+      }
+
+      .navbar {
+        grid-row: span 1 / span 1;
+
+        .nav-logo {
+          grid-column: span 6 / span 6;
+          padding: 0.5rem 1rem !important;
+          font-size: 10px;
+        }
+
+        .nav-filter {
+          grid-column: span 6 / span 6;
+
+          ul {
+            padding: 0 0.25rem;
+            li {
+              font-size: 9px;
+
+              &:nth-child(2) {
+                &:before, &:after {
+                  margin: 0 0.5rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 1536) {
+
+}
