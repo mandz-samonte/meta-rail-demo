@@ -1,56 +1,81 @@
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Line, Doughnut } from 'react-chartjs-2';
+import moment from 'moment';
 
 import DashboardCard from '../DashboardCard';
+import DoughnutChart from './DoughnutChart';
+import LineChart from './LineChart';
 
-const SAMPLE_DATA = [
-  {
-    title: '50',
-    value: 50
-  },
-  {
-    title: '25',
-    value: 25
-  },
-  {
-    title: '100',
-    value: 90
-  },
-  {
-    title: '70',
-    value: 70
+const DOUGHNUT_CHART_TITLES = ['Revenue by Publishers', 'Spend by Advertiser', 'By Industry', 'By Vertical'];
+
+const SAMPLE_DATA = generateDates(new Date(moment().subtract(30, 'days').format('YYYY-MM-DD')), new Date()).map((date) => {
+  return {
+    date: date,
+    sales: Math.floor(Math.random() * (100 - 1 + 1) + 1),
+    cogs: Math.floor(Math.random() * (100 - 1 + 1) + 1),
+    margin: Math.floor(Math.random() * (100 - 1 + 1) + 1),
+    clicks: Math.floor(Math.random() * (100 - 1 + 1) + 1),
+    impressions: Math.floor(Math.random() * (100 - 1 + 1) + 1)
   }
-]
+})
 
-function KeyMetricsDoughnutChart({ title, data }) {
-  return (
-    <div className="doughnut-chart">
-      <div className="doughnut">
-        <Doughnut
-          data={data}
-          options={{
-            legend: {
-              display: false
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            rotation: 1 * Math.PI,
-            circumference: 1 * Math.PI
-          }}
-        />
-      </div>
+function generateDates(startDate, endDate) {
+  let dates = [];
+  let currentDate = startDate;
+  let lastGeneratedDate;
 
-      <span className="doughnut-title">{ title }</span>
-      <div className="breakdowns">
-        <span>$47.00 - MR-PUB-Dev2020</span>
-      </div>
-    </div>
-  )
+  while(new Date(currentDate).toDateString() !== new Date(endDate).toDateString()) {
+    let randomDate = new Date(currentDate.getTime() + Math.random() * (endDate.getTime() - currentDate.getTime()));
+
+    if(new Date(randomDate).toDateString() !== new Date(lastGeneratedDate).toDateString()) {
+      dates.push(randomDate);
+    }
+
+    currentDate = randomDate;
+    lastGeneratedDate = randomDate
+  }
+
+  return dates;
 }
 
-function KeyMetrics() {
+function KeyMetrics({ params }) {
   const [gradient, setGradient] = useState('');
+  const [selectedValue, setSelectedValue] = useState('sales');
+
+  function setAdSpendTotals() {
+    let values = [
+      {
+        label: 'Sales',
+        total: 0
+      },
+      {
+        label: 'CoGS',
+        total: 0
+      },
+      {
+        label: 'Margin',
+        total: 0
+      },
+      {
+        label: 'Clicks',
+        total: 0
+      },
+      {
+        label: 'Impressions',
+        total: 0
+      }
+    ]
+
+    SAMPLE_DATA.forEach(data => {
+      values[0].total += data.sales;
+      values[1].total += data.cogs;
+      values[2].total += data.margin;
+      values[3].total += data.clicks;
+      values[4].total += data.impressions;
+    })
+
+    return values;
+  }
 
   useEffect(() => {
     const chart = document.getElementById('key-metrics-line-chart').getContext('2d');
@@ -67,102 +92,41 @@ function KeyMetrics() {
       title="Key Metrics"
       icons={['info', 'sync-alt', 'cog', 'expand-arrows-alt']}
     >
-      <div>
-        <Line
-          id="key-metrics-line-chart"
-          height={30}
-          width={100}
-          data={{
-            labels: SAMPLE_DATA.map(data => data.title),
-            datasets: [{
-              fill: 'start',
-              data: SAMPLE_DATA.map(data => data.value),
-              backgroundColor: gradient,
-              borderColor: 'rgba(54, 162, 235, 100)',
-              borderWidth: 5,
-            }]
-          }}
-          options={{
-            legend: {
-              display: false,
-            },
-            scales: {
-              yAxes: [{
-                ticks: {
-                  min: 0,
-                  max: 100,
-                  stepSize: 20
-                }
-              }]
-            }
-          }}
-        />
-      </div>
+      <LineChart
+        labels={SAMPLE_DATA.map(data => data.date)}
+        data={SAMPLE_DATA.map(data => data[selectedValue])}
+        color={gradient}
+      />
 
       <div className="ad-spends">
-        <a href="#">
-          <span>$123.16</span>
-          <p>Sales</p>
-        </a>
-        <a href="#">
-          <span>$73.90</span>
-          <p>CoGS</p>
-        </a>
-        <a href="#">
-          <span>$49.26</span>
-          <p>Margin</p>
-        </a>
-        <a href="#">
-          <span>20</span>
-          <p>Clicks</p>
-        </a>
-        <a href="#">
-          <span>0</span>
-          <p>Impressions</p>
-        </a>
+        {
+          setAdSpendTotals().map((adSpends, key) => (
+            <span
+              className="ad-spend"
+              onClick={() => setSelectedValue(adSpends.label.toLowerCase())}
+            >
+              <span>{ key < 3 && '$'}{adSpends.total}</span>
+              <p>{adSpends.label}</p>
+            </span>
+          ))
+        }
       </div>
 
       <div className="doughnut-charts">
-        <KeyMetricsDoughnutChart
-          title="Revenue by Unit"
-          data={{
-            labels: SAMPLE_DATA.map(data => data.title),
-            datasets: [{
-              data: SAMPLE_DATA.map(data => data.value),
-              backgroundColor: 'rgba(255, 115, 115, 100)',
-            }]
-          }}
-        />
-        <KeyMetricsDoughnutChart
-          title="Spend by Advertiser"
-          data={{
-            labels: SAMPLE_DATA.map(data => data.title),
-            datasets: [{
-              data: SAMPLE_DATA.map(data => data.value),
-              backgroundColor: 'rgba(255, 115, 115, 100)',
-            }]
-          }}
-        />
-        <KeyMetricsDoughnutChart
-          title="By Industry"
-          data={{
-            labels: SAMPLE_DATA.map(data => data.title),
-            datasets: [{
-              data: SAMPLE_DATA.map(data => data.value),
-              backgroundColor: 'rgba(255, 115, 115, 100)',
-            }]
-          }}
-        />
-        <KeyMetricsDoughnutChart
-          title="By Vertical"
-          data={{
-            labels: SAMPLE_DATA.map(data => data.title),
-            datasets: [{
-              data: SAMPLE_DATA.map(data => data.value),
-              backgroundColor: 'rgba(255, 115, 115, 100)',
-            }]
-          }}
-        />
+        {
+          DOUGHNUT_CHART_TITLES.map((title, key) => (
+            <DoughnutChart
+              title={title}
+              data={{
+                labels: SAMPLE_DATA.map(data => data.date),
+                datasets: [{
+                  data: SAMPLE_DATA.map(data => data.sales),
+                  backgroundColor: 'rgba(255, 115, 115, 100)',
+                }]
+              }}
+            />
+          ))
+        }
       </div>
 
       <div className="key-metrics-footer">

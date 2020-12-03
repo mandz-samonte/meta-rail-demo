@@ -7,13 +7,18 @@
     justify-content: space-around;
     margin-bottom: 1rem;
 
-    a {
+    .ad-spend {
       text-decoration: none;
       color: black;
       text-align: center;
+      cursor: pointer;
 
       &:hover {
         color: #36a2eb;
+
+        p {
+          color: #36a2eb
+        }
       }
 
       span {
@@ -22,6 +27,7 @@
 
       p {
         font-size: 9px;
+        color: gray;
       }
     }
   }

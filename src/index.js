@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/scss/styles.scss';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+import MainRouter from './routes';
+
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +15,7 @@ library.add(fas, far)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MainRouter />
   </React.StrictMode>,
   document.getElementById('root')
 );

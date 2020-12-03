@@ -5,13 +5,15 @@ import MapView from './map-view/MapView';
 import PerformanceMetrics from './performance-metrics';
 import CampaignMetrics from './campaign-metrics';
 
-function Dashboard() {
+function Dashboard({ match }) {
   return (
     <div className="dashboard">
       <div className="dashboard-container">
         <Navbar />
         <Sidebar />
-        <KeyMetrics />
+        <KeyMetrics
+          params={match.params}
+        />
         <MapView />
         <PerformanceMetrics />
         <CampaignMetrics />

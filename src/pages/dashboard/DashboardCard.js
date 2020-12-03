@@ -18,6 +18,7 @@ function DashboardCard({
           {
             icons.map((icon, key) => (
               <FontAwesomeIcon
+                key={key}
                 className="card-header-icon"
                 size="xs"
                 icon={icon}
