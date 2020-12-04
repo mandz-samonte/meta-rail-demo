@@ -18,6 +18,11 @@ function LineChart({
           backgroundColor: color,
           borderColor: 'rgba(54, 162, 235, 100)',
           borderWidth: 5,
+          pointRadius: 10,
+          pointHoverRadius: 10,
+          pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+          pointBorderColor: 'rgba(0, 0, 0, 0)',
+          pointHoverBackgroundColor: color
         }]
       }}
       options={{
@@ -29,15 +34,21 @@ function LineChart({
             ticks: {
               min: 0,
               max: 100,
-              stepSize: 20
+              stepSize: 20,
+              minor: {
+                fontColor: '#d6d6d6'
+              }
             },
             gridLines: {
-              display: false
-            }
+              drawOnChartArea: false,
+            },
           }],
           xAxes: [{
             ticks: {
-              source: 'labels'
+              source: 'labels',
+              minor: {
+                fontColor: '#d6d6d6'
+              }
             },
             type: 'time',
             time: {

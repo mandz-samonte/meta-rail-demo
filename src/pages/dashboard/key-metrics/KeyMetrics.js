@@ -117,13 +117,7 @@ function KeyMetrics({ params }) {
           DOUGHNUT_CHART_TITLES.map((title, key) => (
             <DoughnutChart
               title={title}
-              data={{
-                labels: SAMPLE_DATA.map(data => data.date),
-                datasets: [{
-                  data: SAMPLE_DATA.map(data => data.sales),
-                  backgroundColor: 'rgba(255, 115, 115, 100)',
-                }]
-              }}
+              data={SAMPLE_DATA}
             />
           ))
         }

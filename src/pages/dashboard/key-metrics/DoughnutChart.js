@@ -2,16 +2,28 @@ import { Doughnut } from 'react-chartjs-2';
 
 function DoughnutChart({
   title,
-  data
+  labels = [],
+  data = []
 }) {
   return (
     <div className="doughnut-chart">
       <div className="doughnut">
         <Doughnut
-          data={data}
+          data={{
+            labels: labels.map(data => data.date),
+            datasets: [{
+              data: data.map(data => data.sales),
+              backgroundColor: 'rgba(255, 115, 115, 0.5)',
+              hoverBackgroundColor: 'rgba(255, 115, 115, 1)',
+              hoverBorderWidth: 0,
+            }]
+          }}
           options={{
             legend: {
               display: false
+            },
+            tooltips: {
+              enabled: false,
             },
             responsive: true,
             maintainAspectRatio: false,
