@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/meta-rail-demo/static/css/main.312a6341.chunk.css",
-    "main.js": "/meta-rail-demo/static/js/main.cefde048.chunk.js",
-    "main.js.map": "/meta-rail-demo/static/js/main.cefde048.chunk.js.map",
+    "main.js": "/meta-rail-demo/static/js/main.ef5970ec.chunk.js",
+    "main.js.map": "/meta-rail-demo/static/js/main.ef5970ec.chunk.js.map",
     "runtime-main.js": "/meta-rail-demo/static/js/runtime-main.1a518ead.js",
     "runtime-main.js.map": "/meta-rail-demo/static/js/runtime-main.1a518ead.js.map",
     "static/css/2.ccc56293.chunk.css": "/meta-rail-demo/static/css/2.ccc56293.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.ccc56293.chunk.css",
     "static/js/2.1ee2b4fe.chunk.js",
     "static/css/main.312a6341.chunk.css",
-    "static/js/main.cefde048.chunk.js"
+    "static/js/main.ef5970ec.chunk.js"
   ]
 }
