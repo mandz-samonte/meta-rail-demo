@@ -24,6 +24,14 @@
     }
   }
 
+  .custom-scroll-pane {
+    padding: 0.5rem;
+    
+    .scroll-pane-container {
+      padding-left: 1rem;
+    }
+  }
+
   .sidebar-filters {
     display: flex;
     flex-direction: column;

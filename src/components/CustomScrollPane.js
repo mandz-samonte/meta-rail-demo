@@ -7,6 +7,7 @@ function CustomScrollPane({
   id = 'scroll-pane-container',
 }) {
   const [value, setValue] = useState('');
+  const [container, setContainer] = useState('');
 
   function onChange(e) {
     setValue(e.target.value);
@@ -33,20 +34,27 @@ function CustomScrollPane({
   }
 
   useEffect(() => {
+    var container = document.getElementById(`${id}-container`);
     var panel = document.getElementById(id);
+    var input = document.getElementById(`${id}-scrollbar-input`);
+
+    input.style.width = `${container.offsetHeight}px`;
+    input.style.right = `-${Math.abs(container.offsetHeight / 2 - 25)}px`;
 
     panel.addEventListener('scroll', scroll);
 
+    setContainer(container);
     setValue(panel.scrollTop);
-  }, []);
+  }, [children]);
 
   return (
-    <div className={classNames('custom-scroll-pane', className)}>
+    <div id={`${id}-container`} className={classNames('custom-scroll-pane', className)}>
       <div id={id} className="scroll-pane-container">
         { children }
       </div>
 
       <input
+        id={`${id}-scrollbar-input`}
         onChange={onChange}
         value={value}
         className="custom-scrollbar"

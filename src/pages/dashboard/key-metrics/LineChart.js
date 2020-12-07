@@ -8,7 +8,7 @@ function LineChart({
   return (
     <Line
       id="key-metrics-line-chart"
-      height={30}
+      height={25}
       width={100}
       data={{
         labels: labels,

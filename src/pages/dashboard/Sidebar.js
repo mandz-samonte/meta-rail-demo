@@ -53,6 +53,14 @@ const VERTICALS = [
   {
     label: 'Property',
     link: '/'
+  },
+  {
+    label: 'Property',
+    link: '/'
+  },
+  {
+    label: 'Property',
+    link: '/'
   }
 ]
 
@@ -70,21 +78,21 @@ function Sidebar() {
 
       <div className="sidebar-filters">
         <span className="category-title">Industries</span>
-          <CustomScrollPane id="industries">
-            {
-              INDUSTRIES.map((industry, key) => (
-                <span key={key}>{ industry.label }</span>
-              ))
-            }
-          </CustomScrollPane>
+        <CustomScrollPane id="industries">
+          {
+            INDUSTRIES.map((industry, key) => (
+              <span key={key}>{ industry.label }</span>
+            ))
+          }
+        </CustomScrollPane>
         <span className="category-title">Verticals</span>
-          <CustomScrollPane id="verticals">
-            {
-              VERTICALS.map((industry, key) => (
-                <span key={key}>{ industry.label }</span>
-              ))
-            }
-          </CustomScrollPane>
+        <CustomScrollPane id="verticals">
+          {
+            VERTICALS.map((industry, key) => (
+              <span key={key}>{ industry.label }</span>
+            ))
+          }
+        </CustomScrollPane>
         <div className="campaigns-container">
           <span className="category-title">Campaigns</span>
 

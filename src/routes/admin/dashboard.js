@@ -5,12 +5,12 @@ const routes = () => {
     {
       path: '/dashboard',
       exact: true,
-      component: Dashboard
+      component: (props) => <Dashboard {...props} />
     },
     {
-      path: '/dashboard/&date_from=:date_from&date_to=:date_to',
+      path: '/dashboard:slug',
       exact: true,
-      component: Dashboard
+      component: (props) => <Dashboard {...props} />
     }
   ]
 }
